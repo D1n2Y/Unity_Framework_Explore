@@ -1,5 +1,6 @@
 ﻿using System;
 using FrameworkDesign.Example.Event;
+using FrameworkDesign.Example.Model;
 using UnityEngine;
 
 namespace FrameworkDesign.Example.Game
@@ -45,10 +46,24 @@ namespace FrameworkDesign.Example.Game
 
         private void ActiveEnemies(object _, EventArgs __)
         {
-            if (_goEnemies)
+            if (!_goEnemies)
             {
-                _goEnemies.SetActive(true);
+                return;
             }
+
+            _goEnemies.SetActive(true);
+            GameModel.ClickedCntChanged += OnClickedCntChanged;
+        }
+
+        private static void OnClickedCntChanged()
+        {
+            if (GameModel.ClickedCnt < GameModel.GamePassClickedCnt)
+            {
+                return;
+            }
+
+            GameEvent.Trigger(Event.Event.GamePass);
+            GameModel.ClickedCntChanged -= OnClickedCntChanged;
         }
     }
 }

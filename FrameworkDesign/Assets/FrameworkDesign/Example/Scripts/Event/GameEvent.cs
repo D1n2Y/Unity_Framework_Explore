@@ -27,7 +27,7 @@ namespace FrameworkDesign.Example.Event
         {
             if (s_dicEventHandler.TryGetValue(@event, out EventHandler<EventArgs> handler))
             {
-                handler.Invoke(sender, args);
+                handler?.Invoke(sender, args);
             }
             else
             {
