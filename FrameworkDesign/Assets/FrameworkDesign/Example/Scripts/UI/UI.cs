@@ -1,6 +1,6 @@
 ﻿using System;
-using FrameworkDesign.Example.Event;
 using UnityEngine;
+using FrameworkDesign.Example.Event;
 
 namespace FrameworkDesign.Example.UI
 {
@@ -27,12 +27,12 @@ namespace FrameworkDesign.Example.UI
 
         private void RegisterGameEvent()
         {
-            GameEvent.Register(Event.Event.GamePass, ActiveGamePass);
+            GameEvent.EventManager.Register(Event.Event.GamePass, ActiveGamePass);
         }
 
         private void UnregisterGameEvent()
         {
-            GameEvent.Unregister(Event.Event.GamePass, ActiveGamePass);
+            GameEvent.EventManager.Unregister(Event.Event.GamePass, ActiveGamePass);
         }
 
         private void FindChildren()
@@ -43,7 +43,7 @@ namespace FrameworkDesign.Example.UI
             }
         }
 
-        private void ActiveGamePass(object _, EventArgs __)
+        private void ActiveGamePass(object _1, EventArgs _2)
         {
             if (_goPass)
             {

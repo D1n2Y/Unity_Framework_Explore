@@ -1,5 +1,5 @@
-﻿using FrameworkDesign.Example.Model;
-using UnityEngine;
+﻿using UnityEngine;
+using FrameworkDesign.Example.Model;
 
 namespace FrameworkDesign.Example.Game
 {
@@ -8,7 +8,7 @@ namespace FrameworkDesign.Example.Game
         private void OnMouseDown()
         {
             Destroy(gameObject);
-            ++GameModel.ClickedCnt;
+            ++GameModel.BindableClickedCnt.Value;
         }
     }
 }

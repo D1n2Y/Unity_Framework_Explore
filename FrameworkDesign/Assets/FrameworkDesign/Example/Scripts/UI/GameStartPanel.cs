@@ -1,6 +1,6 @@
-﻿using FrameworkDesign.Example.Event;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using FrameworkDesign.Example.Event;
 
 namespace FrameworkDesign.Example.UI
 {
@@ -10,7 +10,7 @@ namespace FrameworkDesign.Example.UI
 
         private void Awake()
         {
-            if (this.transform.Find("Btn_Start") is Transform start)
+            if (transform.Find("Btn_Start") is Transform start)
             {
                 _btnStart = start.GetComponent<Button>();
             }
@@ -27,7 +27,7 @@ namespace FrameworkDesign.Example.UI
         private void OnStartClick()
         {
             gameObject.SetActive(false);
-            GameEvent.Trigger(Event.Event.GameStart);
+            GameEvent.EventManager.Trigger(Event.Event.GameStart);
         }
     }
 }

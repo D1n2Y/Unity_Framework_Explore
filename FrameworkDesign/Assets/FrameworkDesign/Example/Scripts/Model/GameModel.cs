@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Framework.Bindable;
 
 namespace FrameworkDesign.Example.Model
 {
@@ -6,23 +6,7 @@ namespace FrameworkDesign.Example.Model
     {
         public const int GamePassClickedCnt = 10;
 
-        private static int s_clickedCnt;
-
-        public static int ClickedCnt
-        {
-            get => s_clickedCnt;
-            set
-            {
-                if (s_clickedCnt == value)
-                {
-                    return;
-                }
-
-                s_clickedCnt = value;
-                ClickedCntChanged?.Invoke();
-            }
-        }
-
-        public static event Action ClickedCntChanged;
+        public static readonly Bindable<int> BindableClickedCnt =
+            Bindable<int>.New(default);
     }
 }

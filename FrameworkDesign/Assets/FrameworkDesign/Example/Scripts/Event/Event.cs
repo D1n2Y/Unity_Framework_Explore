@@ -3,6 +3,6 @@
     public enum Event
     {
         GameStart,
-        GamePass,
+        GamePass
     }
 }

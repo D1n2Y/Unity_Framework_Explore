@@ -1,7 +1,7 @@
 ﻿using System;
+using UnityEngine;
 using FrameworkDesign.Example.Event;
 using FrameworkDesign.Example.Model;
-using UnityEngine;
 
 namespace FrameworkDesign.Example.Game
 {
@@ -28,12 +28,12 @@ namespace FrameworkDesign.Example.Game
 
         private void RegisterGameEvent()
         {
-            GameEvent.Register(Event.Event.GameStart, ActiveEnemies);
+            GameEvent.EventManager.Register(Event.Event.GameStart, ActiveEnemies);
         }
 
         private void UnregisterGameEvent()
         {
-            GameEvent.Unregister(Event.Event.GameStart, ActiveEnemies);
+            GameEvent.EventManager.Unregister(Event.Event.GameStart, ActiveEnemies);
         }
 
         private void FindChildren()
@@ -44,7 +44,7 @@ namespace FrameworkDesign.Example.Game
             }
         }
 
-        private void ActiveEnemies(object _, EventArgs __)
+        private void ActiveEnemies(object _1, EventArgs _2)
         {
             if (!_goEnemies)
             {
@@ -52,18 +52,18 @@ namespace FrameworkDesign.Example.Game
             }
 
             _goEnemies.SetActive(true);
-            GameModel.ClickedCntChanged += OnClickedCntChanged;
+            GameModel.BindableClickedCnt.ValueChanged += OnClickedCntChanged;
         }
 
-        private static void OnClickedCntChanged()
+        private static void OnClickedCntChanged(int value)
         {
-            if (GameModel.ClickedCnt < GameModel.GamePassClickedCnt)
+            if (value < GameModel.GamePassClickedCnt)
             {
                 return;
             }
 
-            GameEvent.Trigger(Event.Event.GamePass);
-            GameModel.ClickedCntChanged -= OnClickedCntChanged;
+            GameEvent.EventManager.Trigger(Event.Event.GamePass);
+            GameModel.BindableClickedCnt.ValueChanged -= OnClickedCntChanged;
         }
     }
 }
