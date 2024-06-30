@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
-using FrameworkDesign.CounterApp.Model;
 using FrameworkDesign.CounterApp.View;
+using FrameworkDesign.CounterApp.Model;
+using FrameworkDesign.CounterApp.Command;
 
 namespace FrameworkDesign.CounterApp.Presenter
 {
@@ -32,12 +33,12 @@ namespace FrameworkDesign.CounterApp.Presenter
 
         public void ClickedAdd()
         {
-            ++CounterModel.BindableCount.Value;
+            new CounterAdd().Execute();
         }
 
         public void ClickedSub()
         {
-            --CounterModel.BindableCount.Value;
+            new CounterSub().Execute();
         }
 
         private void OnCountChanged(int _)
