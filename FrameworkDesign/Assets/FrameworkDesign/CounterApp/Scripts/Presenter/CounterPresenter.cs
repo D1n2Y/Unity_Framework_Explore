@@ -2,6 +2,7 @@
 using FrameworkDesign.CounterApp.View;
 using FrameworkDesign.CounterApp.Model;
 using FrameworkDesign.CounterApp.Command;
+using FrameworkDesign.CounterApp.IoC;
 
 namespace FrameworkDesign.CounterApp.Presenter
 {
@@ -23,12 +24,12 @@ namespace FrameworkDesign.CounterApp.Presenter
 
         private void OnEnable()
         {
-            CounterModel.BindableCount.ValueChanged += OnCountChanged;
+            App.Container.Resolve<CounterModel>().BindableCount.ValueChanged += OnCountChanged;
         }
 
         private void OnDisable()
         {
-            CounterModel.BindableCount.ValueChanged -= OnCountChanged;
+            App.Container.Resolve<CounterModel>().BindableCount.ValueChanged -= OnCountChanged;
         }
 
         public void ClickedAdd()
@@ -48,7 +49,7 @@ namespace FrameworkDesign.CounterApp.Presenter
 
         private void ChangeCount()
         {
-            View.SetCount(CounterModel.BindableCount.Value.ToString());
+            View.SetCount(App.Container.Resolve<CounterModel>().BindableCount.Value.ToString());
         }
     }
 }

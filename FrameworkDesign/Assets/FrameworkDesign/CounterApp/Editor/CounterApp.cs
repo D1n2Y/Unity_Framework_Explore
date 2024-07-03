@@ -2,7 +2,9 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using FrameworkDesign.CounterApp.Command;
+using FrameworkDesign.CounterApp.IoC;
 using FrameworkDesign.CounterApp.Model;
+using FrameworkDesign.CounterApp.Utility;
 
 namespace FrameworkDesign.CounterApp.Editor
 {
@@ -15,6 +17,8 @@ namespace FrameworkDesign.CounterApp.Editor
         [MenuItem("Window/CounterApp")]
         private static void Open()
         {
+            App.Container.RegisterSingleton<IStorage, EditorPreferencesStorage>();
+            App.Container.RegisterSingleton<CounterModel, CounterModel>();
             GetWindow<CounterApp>();
         }
 
@@ -45,7 +49,7 @@ namespace FrameworkDesign.CounterApp.Editor
 
         private void ChangeCount()
         {
-            _lblCount.text = CounterModel.BindableCount.Value.ToString();
+            _lblCount.text = App.Container.Resolve<CounterModel>().BindableCount.Value.ToString();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using FrameworkDesign.Example.Event;
+using FrameworkDesign.Example.IoC;
 using FrameworkDesign.Example.Model;
 
 namespace FrameworkDesign.Example.Game
@@ -52,7 +53,7 @@ namespace FrameworkDesign.Example.Game
             }
 
             _goEnemies.SetActive(true);
-            GameModel.BindableClickedCnt.ValueChanged += OnClickedCntChanged;
+            GameIoC.Container.Resolve<GameModel>().BindableClickedCnt.ValueChanged += OnClickedCntChanged;
         }
 
         private static void OnClickedCntChanged(int value)
@@ -63,7 +64,7 @@ namespace FrameworkDesign.Example.Game
             }
 
             GameEvent.EventManager.Trigger(Event.Event.GamePass);
-            GameModel.BindableClickedCnt.ValueChanged -= OnClickedCntChanged;
+            GameIoC.Container.Resolve<GameModel>().BindableClickedCnt.ValueChanged -= OnClickedCntChanged;
         }
     }
 }

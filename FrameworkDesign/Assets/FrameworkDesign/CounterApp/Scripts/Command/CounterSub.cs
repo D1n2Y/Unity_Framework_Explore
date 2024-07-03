@@ -1,4 +1,5 @@
 ﻿using Framework.Command;
+using FrameworkDesign.CounterApp.IoC;
 using FrameworkDesign.CounterApp.Model;
 
 namespace FrameworkDesign.CounterApp.Command
@@ -7,7 +8,7 @@ namespace FrameworkDesign.CounterApp.Command
     {
         public void Execute()
         {
-            --CounterModel.BindableCount.Value;
+            --App.Container.Resolve<CounterModel>().BindableCount.Value;
         }
     }
 }

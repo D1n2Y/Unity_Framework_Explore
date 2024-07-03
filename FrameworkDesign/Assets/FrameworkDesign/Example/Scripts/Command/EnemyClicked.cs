@@ -1,4 +1,5 @@
 ﻿using Framework.Command;
+using FrameworkDesign.Example.IoC;
 using FrameworkDesign.Example.Model;
 
 namespace FrameworkDesign.Example.Command
@@ -12,7 +13,7 @@ namespace FrameworkDesign.Example.Command
 
         public void Execute()
         {
-            ++GameModel.BindableClickedCnt.Value;
+            ++GameIoC.Container.Resolve<GameModel>().BindableClickedCnt.Value;
         }
     }
 }
